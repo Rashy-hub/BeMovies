@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+@mixin flex-container {
+    max-width: 1440px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    border: 2px black solid;
+}
+
+@mixin logo-typo {
+    font-family: Inria Sans;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 43.16px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+@mixin nav-typo {
+    font-family: Inria Sans;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16.79px;
+    letter-spacing: 0.03em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+@mixin main-typo {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    text-align: left;
+}
+@mixin center-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin input-style {
+    width: 272px;
+    height: 44px;
+    padding: 5px;
+    top: 173px;
+    left: 584px;
+    gap: 0px;
+    border-radius: 8px 8px 8px 8px;
+    opacity: 0px;
+    box-shadow: 4px 8px 20px 0px rgba(0, 0, 0, 0.25);
+}
+@mixin input-svg-arrow {
+    width: 44px;
+    height: 44px;
+    top: 173px;
+    left: 812px;
+    gap: 0px;
+    border-radius: 0px 8px 8px 0px;
+    opacity: 0px;
+}
+$primary-background: rgba(25, 27, 32, 1);
+$secondary_background: rgba(20, 21, 23, 1);

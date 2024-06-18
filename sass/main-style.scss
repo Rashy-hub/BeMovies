@@ -1,3 +1,7 @@
+@use 'base';
+@use 'header';
+@use 'footer';
+
 *,
 *::before,
 *::after {
@@ -5,3 +9,71 @@
     margin: 0;
     padding: 0;
 }
+:root {
+    --swiper-navigation-sides-offset: -5%;
+}
+body {
+    background: rgba(128, 128, 128, 0.548);
+}
+img {
+    width: 100%;
+}
+
+/*Main container*/
+.main {
+    @include base.flex-container;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: base.$primary-background;
+    padding-left: 182px;
+    padding-right: 182px;
+    padding-bottom: 60px;
+}
+
+/*Section user interface*/
+
+.uisection {
+    @include base.main-typo;
+    @include base.center-flex;
+    width: 100%;
+    padding: 5rem;
+}
+
+.uisection__input {
+    @include base.input-style;
+    @include base.main-typo;
+}
+
+.uisection__button {
+    background: red;
+    width: 44px;
+    height: 44px;
+    top: 173px;
+    left: 812px;
+    gap: 0px;
+    border-radius: 0px 8px 8px 0px;
+    opacity: 0px;
+}
+
+/*Section results*/
+
+.results {
+    @include base.main-typo;
+    @include base.center-flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    color: white;
+    h2 {
+        @include base.main-typo;
+    }
+}
+.results__swiper {
+    position: relative;
+    max-width: 1200px;
+}
+.results--hidden {
+    display: none;
+}
+
+/**/

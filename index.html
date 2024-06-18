@@ -9,39 +9,104 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
         />
+
+        <script src="./javascript/app.js" defer></script>
     </head>
     <body>
-        <header class="header container">
+        <header class="header">
             <div class="header__logo"><span>Be</span>Movies</div>
-            <nav></nav>
+            <nav class="header__nav">
+                <a href="#results">search</a><a href="#latest">latest</a
+                ><a href="#genre">genres</a> <a href="">register</a
+                ><a href="">signin</a>
+            </nav>
         </header>
-        <main class="main container">
+        <main class="main">
             <section class="uisection">
-                <input type="text" class="uisection__input" />
-                <button type="submit" class="uisection__button">
-                    <svg
-                        width="20"
-                        height="16"
-                        viewBox="0 0 20 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M12 1L19 8M19 8L12 15M19 8H1"
-                            stroke="white"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
-                    </svg>
+                <input
+                    type="text"
+                    class="uisection__input"
+                    id="search_input"
+                    placeholder="search for a movie"
+                />
+                <button
+                    type="submit"
+                    class="uisection__button"
+                    id="search_submit"
+                >
+                    <img src="./assets/fleche.svg" alt="svg fleche" />
                 </button>
             </section>
-            <section class="results results--hidden">
-                <h2 class="results__title"></h2>
+            <section id="results" class="results results--hidden">
+                <h2 class="results__title">results for <span></span></h2>
+                <!-- Slider main container -->
+                <div class="results__swiper">
+                    <div class="swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            <div class="swiper-slide">
+                                <img
+                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
+                                    alt="slide 1"
+                                    width="234px"
+                                    height="341px"
+                                />
+                            </div>
+                            <div class="swiper-slide">
+                                <img
+                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
+                                    alt="slide 2"
+                                    width="234px"
+                                    height="341px"
+                                />
+                            </div>
+                            <div class="swiper-slide">
+                                <img
+                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
+                                    alt="slide 3"
+                                    width="234px"
+                                    height="341px"
+                                />
+                            </div>
+                            <div class="swiper-slide">
+                                <img
+                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
+                                    alt="slide 4"
+                                    width="234px"
+                                    height="341px"
+                                />
+                            </div>
+                            <div class="swiper-slide">
+                                <img
+                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
+                                    alt="slide 1"
+                                    width="234px"
+                                    height="341px"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- If we need navigation buttons -->
+                    <img
+                        class="swiper-button-prev"
+                        src="./assets/nav-arrow-right.svg"
+                    />
+                    <img
+                        class="swiper-button-next"
+                        src="./assets/nav-arrow-left.svg"
+                    />
+                </div>
             </section>
-            <section class="latest"><h2 class="latest__title"></h2></section>
-            <section class="genre"><h2 class="genre__title"></h2></section>
+            <section id="latest" class="latest">
+                <h2 class="latest__title"></h2>
+            </section>
+            <section id="genre" class="genre">
+                <h2 class="genre__title"></h2>
+            </section>
         </main>
-        <footer class="footer container"></footer>
+        <footer class="footer"></footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     </body>
 </html>

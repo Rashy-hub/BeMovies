@@ -1,0 +1,32 @@
+@use 'base';
+
+.header {
+    @include base.flex-container;
+    justify-content: space-between;
+    padding: 26px 180px;
+    max-height: 100px;
+    background: base.$secondary_background;
+}
+
+.header__logo {
+    @include base.logo-typo;
+    color: white;
+    span {
+        color: red;
+    }
+}
+
+.header__nav {
+    @include base.nav-typo;
+    max-width: 374px;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    a:hover {
+        color: gold;
+    }
+}
