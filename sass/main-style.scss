@@ -62,7 +62,7 @@ img {
     @include base.center-flex;
     flex-direction: column;
     gap: 2rem;
-    width: 100%;
+    width: 1440px;
     color: white;
     h2 {
         @include base.main-typo;
@@ -70,10 +70,29 @@ img {
 }
 .results__swiper {
     position: relative;
-    max-width: 1200px;
+    max-width: 1000px;
 }
 .results--hidden {
     display: none;
 }
 
-/**/
+/*latest section*/
+
+.latest {
+    @include base.main-typo;
+    @include base.center-flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    color: white;
+    h2 {
+        @include base.main-typo;
+    }
+    min-width: fit-content;
+    max-width: 1440px;
+    margin-top: 50px;
+}
+.latest__swiper {
+    position: relative;
+    max-width: 1000px;
+}
