@@ -20,41 +20,40 @@ const submitHandler = (event) => {
 }
 searchSubmit.addEventListener('click', submitHandler)
 
-const swiperResult = new Swiper('.swiper-container-result', {
-    // Optional parameters
-    direction: 'horizontal',
-    loop: true,
-    slidesPerView: 4,
-    spaceBetween: 19,
-    slidesPerGroup: 1,
-    slidesOffsetAfter: 100,
-    slidesOffsetbefore: 100,
-    //setWrapperSize: true,
-
-    // Navigation arrows with unique class names
-    navigation: {
-        nextEl: '.result-swiper-buttons .swiper-button-next',
-        prevEl: '.result-swiper-buttons .swiper-button-prev',
-    },
-})
-
-const swiperLatest = new Swiper('.swiper-container-latest', {
-    // Optional parameters
-    direction: 'horizontal',
-    loop: true,
-    slidesPerView: 4,
-    spaceBetween: 19,
-    slidesPerGroup: 1,
-    slidesOffsetAfter: 100,
-    slidesOffsetbefore: 100,
-    //setWrapperSize: true,
-
-    // Navigation arrows with unique class names
-    navigation: {
-        nextEl: '.latest-swiper-buttons .swiper-button-next',
-        prevEl: '.latest-swiper-buttons .swiper-button-prev',
-    },
-})
+const swiperResult = SwiperFactory(
+    '.swiper-container-result',
+    '.result-swiper-buttons'
+)
+const swiperLatest = SwiperFactory(
+    '.swiper-container-latest',
+    '.latest-swiper-buttons'
+)
+const swiperGenre = SwiperFactory(
+    '.swiper-container-genre',
+    '.genre-swiper-buttons'
+)
 
 swiperResult.enable()
 swiperLatest.enable()
+swiperGenre.enable()
+
+function SwiperFactory(containerClass, buttonsClass) {
+    const swiper = new Swiper(containerClass, {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+        slidesPerView: 4,
+        spaceBetween: 19,
+        slidesPerGroup: 1,
+        slidesOffsetAfter: 100,
+        slidesOffsetbefore: 100,
+        //setWrapperSize: true,
+
+        // Navigation arrows with unique class names
+        navigation: {
+            nextEl: `${buttonsClass} .swiper-button-next`,
+            prevEl: `${buttonsClass} .swiper-button-prev`,
+        },
+    })
+    return swiper
+}
