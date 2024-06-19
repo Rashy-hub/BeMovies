@@ -1,8 +1,27 @@
+import { myFunction } from './swiperHandlers.js'
+import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+
 const searchInput = document.getElementById('search_input')
 const searchSubmit = document.getElementById('search_submit')
 
 const resultsSection = document.getElementById('results')
 const resultSpan = document.querySelector('.results h2 span')
+
+//Swiper events handler
+
+const swiperOnInit = function (event) {
+    if (event.el.classList.contains('swiper-container-result')) {
+        console.log('swiper initialized in results section')
+    } else if (event.el.classList.contains('swiper-container-latest')) {
+        console.log('swiper initialized in latest section')
+        //load default latest images from movie database
+    } else if (event.el.classList.contains('swiper-container-genre')) {
+        console.log('swiper initialized in genre')
+        //load default active genre images from movie database
+    } else console.log('unknown swiper module : default images loaded')
+}
+
+//User interface events handler
 
 const submitHandler = (event) => {
     event.preventDefault()
@@ -18,6 +37,9 @@ const submitHandler = (event) => {
 
     //if results existes display block the results section
 }
+
+// Main code
+
 searchSubmit.addEventListener('click', submitHandler)
 
 const swiperResult = SwiperFactory(
@@ -36,6 +58,7 @@ const swiperGenre = SwiperFactory(
 swiperResult.enable()
 swiperLatest.enable()
 swiperGenre.enable()
+myFunction()
 
 function SwiperFactory(containerClass, buttonsClass) {
     const swiper = new Swiper(containerClass, {
@@ -53,6 +76,10 @@ function SwiperFactory(containerClass, buttonsClass) {
         navigation: {
             nextEl: `${buttonsClass} .swiper-button-next`,
             prevEl: `${buttonsClass} .swiper-button-prev`,
+        },
+
+        on: {
+            init: swiperOnInit,
         },
     })
     return swiper
