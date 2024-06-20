@@ -1,5 +1,5 @@
-import { swiperOnInit, SwiperFactory } from './swiperHandlers.js'
-
+import { SwiperFactory } from './swiperHandlers.js'
+import { resultFetchData } from './apiHandlers.js'
 const searchInput = document.getElementById('search_input')
 const searchSubmit = document.getElementById('search_submit')
 
@@ -15,6 +15,7 @@ const submitHandler = (event) => {
         resultsSection.style.display = 'none'
         return
     } else {
+        resultFetchData(searchInput.value)
         resultsSection.style.display = 'flex'
     }
     resultSpan.textContent = searchInput.value
