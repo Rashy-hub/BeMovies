@@ -14,6 +14,8 @@
     </head>
     <body>
         <header class="header">
+            <!-- only for SEO purpose this title is not displayed -->
+            <h1>BeMovies movie app</h1>
             <div class="header__logo"><span>Be</span>Movies</div>
             <nav class="header__nav">
                 <a href="#results">search</a><a href="#latest">latest</a
@@ -193,17 +195,20 @@
             </section>
             <section id="genre" class="genre">
                 <h2 class="genre__title">Movies by genre</h2>
-                <ul class="genre__list">
-                    <li class="genre__list__item genre__list__item--active">
-                        Comedy
-                    </li>
-                    <li class="genre__list__item">Drama</li>
-                    <li class="genre__list__item">Action</li>
-                    <li class="genre__list__item">Romance</li>
-                    <li class="genre__list__item">Fantasy</li>
-                    <li class="genre__list__item">Animation</li>
-                </ul>
-                <div class="genre__bar"></div>
+                <div class="genre__listcontainer">
+                    <ul class="genre__list">
+                        <li class="genre__list__item genre__list__item--active">
+                            Comedy
+                        </li>
+                        <li class="genre__list__item">Drama</li>
+                        <li class="genre__list__item">Action</li>
+                        <li class="genre__list__item">Romance</li>
+                        <li class="genre__list__item">Fantasy</li>
+                        <li class="genre__list__item">Animation</li>
+                    </ul>
+                    <div class="genre__bar"></div>
+                </div>
+                <h3><span>Comedy</span></h3>
                 <!-- Slider main container -->
                 <div class="genre__swiper">
                     <div class="swiper-container-genre swiper">
@@ -280,7 +285,15 @@
                 </div>
             </section>
         </main>
-        <footer class="footer"></footer>
+        <footer class="footer">
+            <div class="footer__logo"><span>Be</span>Movies</div>
+            <nav class="footer__nav">
+                <a href="#results">search</a><a href="#latest">latest</a
+                ><a href="#genre">genres</a> <a href="">register</a
+                ><a href="">signin</a>
+            </nav>
+            <p>@2023 - All rights reserved</p>
+        </footer>
 
         <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
     </body>

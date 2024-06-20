@@ -11,7 +11,7 @@ const resultSpan = document.querySelector('.results h2 span')
 const submitHandler = (event) => {
     event.preventDefault()
     //call api here to find results related to a movie
-    if (!searchInput.value) {
+    if (!searchInput.value.trim()) {
         resultsSection.style.display = 'none'
         return
     } else {

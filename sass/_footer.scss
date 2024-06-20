@@ -1,4 +1,40 @@
 @use 'base';
-footer {
+
+.footer {
     @include base.flex-container;
+    justify-content: space-between;
+    padding: 26px 180px;
+    height: 186px;
+    background: base.$secondary_background;
+    p {
+        color: #b8b8b8;
+        font-family: 'Inria Sans';
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 16.79px;
+        text-align: left;
+    }
+}
+
+.footer__logo {
+    @include base.logo-typo;
+    color: white;
+    span {
+        color: red;
+    }
+}
+
+.footer__nav {
+    @include base.nav-typo;
+    max-width: 374px;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    a:hover {
+        color: gold;
+    }
 }
