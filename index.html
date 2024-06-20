@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>BeMovies</title>
-        <link rel="stylesheet" href="./dist/css/main-style.css" />
+        <link rel="stylesheet" href="./sass/main-style.css" />
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
@@ -45,7 +45,7 @@
                 <div class="results__swiper">
                     <div class="swiper-container-result swiper">
                         <!-- Additional required wrapper -->
-                        <div class="swiper-wrapper">
+                        <div class="swiper-wrapper" id="searchWrapper">
                             <!-- Slides -->
                             <div class="swiper-slide">
                                 <img
@@ -60,42 +60,6 @@
                                 <img
                                     src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
                                     alt="slide 2"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 3"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 4"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 1"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 1"
                                     width="234px"
                                     height="341px"
                                     loading="lazy"
@@ -215,6 +179,16 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
+                            <template id="cardTemplate">
+                                <div class="overlayCard">
+                                <div class="cardContent">
+                                    <h2></h2>
+                                    <h4></h4>
+                                    <p></p>
+                                    <h3></h3>
+                                    </div>
+                                </div>
+                                <img alt=""></img></template>
                             <div class="swiper-slide">
                                 <img
                                     src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
