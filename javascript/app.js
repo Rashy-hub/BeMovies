@@ -5,6 +5,7 @@ const searchSubmit = document.getElementById('search_submit')
 
 const resultsSection = document.getElementById('results')
 const resultSpan = document.querySelector('.results h2 span')
+let resultPage = 1
 
 //User interface events handler
 
@@ -15,7 +16,7 @@ const submitHandler = (event) => {
         resultsSection.style.display = 'none'
         return
     } else {
-        resultFetchData(searchInput.value)
+        resultFetchData(searchInput.value, resultPage)
         resultsSection.style.display = 'flex'
     }
     resultSpan.textContent = searchInput.value
