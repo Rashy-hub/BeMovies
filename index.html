@@ -24,6 +24,41 @@
             </nav>
         </header>
         <main class="main">
+            <!-- Modal -->
+            <div id ="modal" class="modal">
+                <div class="signupBox">
+                    <img src="./Assets/Close.svg" alt="">
+                    <div class="input-flex">
+                        <div class="btnWrapper">
+                            <a class="left" href="">Signup</a>
+                            <a class="right toggle" href="">Login</a>
+                        </div>
+                        <input type="text" placeholder="Username">
+                        <input type="text" placeholder="Password">
+                    </div>
+                        <input type="checkbox" id="checkbox"><label for="">Remember me</label>
+                        <button>Login</button>
+                        <a href="" id="forgotLink">I forgot my password</a>
+                        <p>Not a member yet ?<span> <a href="">Sign up</a></span></p>
+                </div>
+            </div>
+            <div class="overlay">
+                <div class="popupMovie">
+                    <img src="./Assets/Close.svg" id="crossBtn" alt="">
+                    <div class="popupMovie-flex">
+                        <img src="./Assets/affiche.jpg" alt="">
+                        <div>
+                            <h3>The Godfather</h3>
+                            <h4>1972</h4>
+                            <h3 class="score"><img id="star" src="./Assets/star.svg" alt="">8.7</h3>
+                            <h5>Crime/Drama</h5>
+                            <p>Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.</p>
+                            <p><span>Cast: </span>Marlon Brando, Al Pacino, James Caan, Robert Duvall</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Modal -->
             <section class="uisection">
                 <input
                     type="text"
@@ -47,24 +82,6 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper" id="searchWrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 1"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 2"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
                         </div>
                     </div>
                     <!-- If we need navigation buttons -->
@@ -86,62 +103,8 @@
                 <div class="latest__swiper">
                     <div class="swiper-container-latest swiper">
                         <!-- Additional required wrapper -->
-                        <div class="swiper-wrapper">
+                        <div class="swiper-wrapper" id="latestWrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 1"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 2"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 3"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 4"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 1"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 1"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
                         </div>
                     </div>
                     <!-- If we need navigation buttons -->
@@ -161,88 +124,26 @@
                 <h2 class="genre__title">Movies by genre</h2>
                 <div class="genre__listcontainer">
                     <ul class="genre__list">
-                        <li class="genre__list__item genre__list__item--active">
+                        <li class="genre__list__item genre__list__item--active" id="comedy" data-id="35">
                             Comedy
                         </li>
-                        <li class="genre__list__item">Drama</li>
-                        <li class="genre__list__item">Action</li>
-                        <li class="genre__list__item">Romance</li>
-                        <li class="genre__list__item">Fantasy</li>
-                        <li class="genre__list__item">Animation</li>
+                        <li class="genre__list__item" id="drama" data-id="18">Drama</li>
+                        <li class="genre__list__item" id="action" data-id="28">Action</li>
+                        <li class="genre__list__item" id="romance" data-id="10749">Romance</li>
+                        <li class="genre__list__item" id="fantasy" data-id="14">Fantasy</li>
+                        <li class="genre__list__item" id="animation" data-id="16">Animation</li>
                     </ul>
                     <div class="genre__bar"></div>
                 </div>
-                <h3><span>Comedy</span></h3>
+                <h3><span id="selectedGenre">Comedy</span></h3>
                 <!-- Slider main container -->
                 <div class="genre__swiper">
                     <div class="swiper-container-genre swiper">
                         <!-- Additional required wrapper -->
-                        <div class="swiper-wrapper">
+                        <div class="swiper-wrapper" id="genreWrapper">
                             <!-- Slides -->
-                            <template id="cardTemplate">
-                                <div class="overlayCard">
-                                <div class="cardContent">
-                                    <h2></h2>
-                                    <h4></h4>
-                                    <p></p>
-                                    <h3></h3>
-                                    </div>
-                                </div>
-                                <img alt=""></img></template>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 1"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 2"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 3"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 4"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 1"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="swiper-slide">
-                                <img
-                                    src="./assets/3a9723ae5397841adf7fbaed84bd30b2.jpeg"
-                                    alt="slide 1"
-                                    width="234px"
-                                    height="341px"
-                                    loading="lazy"
-                                />
-                            </div>
+
+                            
                         </div>
                     </div>
                     <!-- If we need navigation buttons -->
@@ -257,6 +158,18 @@
                         />
                     </div>
                 </div>
+<!-- Template card swiper -->
+                            <template id="cardTemplate">
+                                <div class="overlayCard">
+                                    <div class="cardContent">
+                                        <h2></h2>
+                                        <h4></h4>
+                                        <p></p>
+                                        <h3></h3>
+                                    </div>
+                                </div>
+                                <img class="moviePoster" alt="">
+                            </template>
             </section>
         </main>
         <footer class="footer">

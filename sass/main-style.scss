@@ -48,6 +48,7 @@ h1 {
     @include base.main-typo;
 }
 
+//Search arrow button
 .uisection__button {
     background: red;
     width: 44px;
@@ -84,6 +85,62 @@ h1 {
     display: none;
 }
 
+// Card overlay
+
+.overlayCard {
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: .5s ease;
+    opacity: 0;
+}
+.cardContent {
+        padding: 76px 38px 38px 38px;
+        font-family: "Inter", sans-serif;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        h2 {
+            font-weight: 700;
+            font-size: 1.25rem;
+            line-height: 1.5rem;
+            color: white;
+        }
+        h4 {
+            font-weight: 700;
+            font-size: 1.25rem;
+            line-height: 1.5rem;
+            color: #B0B0B0;
+        }
+        p {
+            font-weight: 500;
+            font-size: .875rem;
+            line-height: 16.49px;
+            color: white;
+        }
+        h3 {
+            font-weight: 700;
+            font-size: 2rem;
+            line-height: 2.4rem;
+            color: #CC0000;
+            img {
+                height: 34px;
+                width: 34px;
+            }
+        }
+    }
+
+    .overlayCard:hover {
+        opacity: 0.9;
+        cursor: pointer;
+}
 /*latest section*/
 
 .latest {
@@ -153,7 +210,225 @@ h1 {
     background: red;
 }
 
+.genre__list__item {
+    cursor: pointer;
+}
+
 .genre__swiper {
     position: relative;
     max-width: 1000px;
+}
+
+// Modal CSS
+
+.modal {
+    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.4);
+    //display: block pour afficher le modal 
+    display: none;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-top: 11px;
+        margin-left: 11px;
+    }
+    .signupBox {
+        margin: 5% auto;
+        height: 608px;
+        width: 410px;
+        padding: 61px;
+        background-color: black;
+        position: relative;
+        text-align: left;
+        .input-flex {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 25px;
+            margin-bottom: 22px;
+            .btnWrapper {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                margin-top: 5px;
+                margin-bottom: 29px;;
+                height: 54px;
+                .left, .right {
+                    font-family: "Inria Sans", sans-serif;
+                    font-weight: 700;
+                    font-size: 1.5rem;
+                    line-height: 1.8rem;
+                    color: white;
+                    text-transform: uppercase;
+                }
+                .left {
+                    border-top: solid 1px white;
+                    border-bottom: solid 1px white;
+                    border-left: solid 1px white;
+                    padding: 11px 26px 14px 32px;
+                    border-radius: 8px 0px 0px 8px;
+                }
+                .right {
+                    border-top: solid 1px white;
+                    border-bottom: solid 1px white;
+                    border-right: solid 1px white;
+                    padding: 11px 45px 14px 32px;
+                    border-radius: 0px 8px 8px 0px;
+                }
+                .toggle {
+                    background-color: #CC0000;
+                    border: none;
+                }
+            }
+            input {
+                margin: 0 auto;
+                padding: 12.4px 0px 12.4px 20px;
+                width: 100%;
+                border-radius: 8px;
+                border: none;
+            }
+        }
+        
+        #checkbox {
+            margin-bottom: 46px;
+        }
+        label {
+            display: inline;
+            padding-left: 9px;
+            color: white;
+            font-family: "Inter", sans-serif;;
+        }
+        button {
+            background-color: #CC0000;
+            display: block;
+            border: none;
+            font-family: "Inria Sans", sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            line-height: 1.5rem;
+            color: white;
+            text-transform: uppercase;
+            padding: 11px 115px 12px 115px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+        #forgotLink {
+            display: block;
+            color: #CC0000;
+            font-family: "Inter", sans-serif;;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.21rem;
+            margin-bottom: 19px;
+        }
+        p {
+            color: white;
+            font-family: "Inter", sans-serif;;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.21rem;
+            span {
+                a {
+                    color: #CC0000;
+                }
+            }
+        }
+    }
+}
+
+.overlay {
+    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.4);
+    //display: block pour afficher le modal 
+    display: none;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.popupMovie {
+    background-color: #000;
+    padding: 74px 79px;
+    margin: 5% auto;
+    max-width: 742px;
+    position: relative;
+    #crossBtn {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-top: 11px;
+        margin-left: 11px;
+    }
+    .popupMovie-flex {
+        display: flex;
+        flex-direction: row;
+        gap: 52px;
+        img {
+            max-width: 234px;
+            border: solid 1px white;
+        }
+        div {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            text-align: left;
+            h3 {
+                color: #CC0000;
+                text-transform: uppercase;
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-size: 1.25rem;
+                line-height: 1.5rem;
+                #star {
+                    border: none;
+                    margin-right: 5px;
+                }
+            }
+            h4 {
+                color: white;
+                font-family: "Inria Sans", sans-serif;
+                font-weight: 700;
+                font-size: .875rem;
+                line-height: 1.05rem;
+                margin-bottom: 11px;
+            }
+            .score {
+                font-family: "Inter", sans-serif;;
+                margin-bottom: 12px;
+            }
+            h5 {
+                color: white;
+                font-family: "Inria Sans", sans-serif;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: .875rem;
+                line-height: 1.05rem;
+                margin-bottom: 13px;
+            }
+            p {
+                font-family: "Inria Sans", sans-serif;
+                color: white;
+                font-weight: 300;
+                font-size: 1rem;
+                line-height: 1.5rem;
+                margin-bottom: 10px;
+                span {
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
 }
