@@ -1,0 +1,13 @@
+# This is a basic example Blueprint for a static website on Render
+type: web
+name: bemovies # Replace with your desired app name
+runtime: static
+
+# Build script to compile Sass/CSS and potentially minify JavaScript
+buildCommand: npm install && npm run build # Example using npm, adjust for your build tool
+
+# Path to the directory containing your built static files (index.html, assets, etc.)
+staticPublishPath: ./ # Replace with your actual build output directory
+
+# Optional: Disable automatic deployments on push (manual deployments only)
+# autoDeploy: false
