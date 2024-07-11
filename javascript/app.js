@@ -99,7 +99,8 @@ genreListItems.forEach(function (item) {
                 page: 1,
                 with_genres: item.dataset.genreid,
             }),
-            swiperGenre
+            swiperGenre,
+            genrePagination
         )
         genreSpan.textContent = `${item.textContent} - Total ${genreTotalResults} results`
     })
