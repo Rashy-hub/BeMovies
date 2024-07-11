@@ -144,7 +144,7 @@ export function SwiperFactory(containerClass, buttonsClass) {
         slidesPerView: 1,
         spaceBetween: 20,
         speed: 300,
-        slidesPerGroup: 2,
+        slidesPerGroup: 3,
         breakpoints: {
             500: {
                 slidesPerView: 2,
