@@ -129,26 +129,6 @@ export async function fetchData(
             `result total number of pages is equal to ${responseJson.total_pages}`
         )
 
-        /*   if (swiper.el.classList.contains('swiper-container-result')) {
-            resultsPagination.totalPage = responseJson.total_pages
-            console.log(
-                `result total number of pages is equal to ${responseJson.total_pages}`
-            )
-            resultsPagination.actualPage = responseJson.page
-        } else if (swiper.el.classList.contains('swiper-container-latest')) {
-            latestPagination.totalPage = responseJson.total_pages
-            console.log(
-                `latest total number of pages is equal to ${responseJson.total_pages}`
-            )
-            latestPagination.actualPage = responseJson.page
-        } else if (swiper.el.classList.contains('swiper-container-genre')) {
-            genrePagination.totalPage = responseJson.total_pages
-            console.log(
-                `genre total number of pages is equal to ${responseJson.total_pages}`
-            )
-            genrePagination.actualPage = responseJson.page
-        } */
-
         //initializing or updating slides
         if (responseJson.page === 1) {
             console.log('first time loading images for the this query ')
