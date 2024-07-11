@@ -159,7 +159,9 @@ export function SwiperFactory(containerClass, buttonsClass) {
         slidesOffsetAfter: 100,
         slidesOffsetbefore: 100,
         //setWrapperSize: true,
-
+        mousewheel: {
+            releaseOnEdges: true,
+        },
         // Navigation arrows with unique class names
         navigation: {
             nextEl: `${buttonsClass} .swiper-button-next`,
