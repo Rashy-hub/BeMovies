@@ -124,15 +124,12 @@ export const loadMoreHandler = function (swiper) {
 }
 
 const swiperOnInit = function (event) {
-    if (event.el.classList.contains('swiper-container-result')) {
-        console.log('swiper initialized in results section')
-    } else if (event.el.classList.contains('swiper-container-latest')) {
-        console.log('swiper initialized in latest section')
-        //load default latest images from movie database
-    } else if (event.el.classList.contains('swiper-container-genre')) {
-        console.log('swiper initialized in genre')
-        //load default active genre images from movie database
-    } else console.log('unknown swiper module : default images loaded')
+    const currentSwiper = event.el.classList[0].split('-')[2]
+    if (!event.el.classList[0].startsWith('swiper-container-'))
+        console.log(
+            'Swiper module cannot be initialized , maybe swiper container does not exist or is not named correctly'
+        )
+    else console.log(`Swiper init in ${currentSwiper} section`)
 }
 
 // Swiper factory that helps create multiple independant swipers
