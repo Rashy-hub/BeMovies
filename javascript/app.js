@@ -1,4 +1,10 @@
-import { fetchData, getDynamicUrl, resultsPagination } from './apiHandlers.js'
+import {
+    fetchData,
+    getDynamicUrl,
+    resultsPagination,
+    genrePagination,
+    latestPagination,
+} from './apiHandlers.js'
 import { SwiperFactory } from './swiperHandlers.js'
 
 const searchInput = document.querySelector('#search_input')
@@ -31,7 +37,8 @@ const searchSubmitHandler = async (event) => {
                 query: encodeURIComponent(searchInput.value),
                 page: 1,
             }),
-            swiperResult
+            swiperResult,
+            resultsPagination
         )
         resultsPagination.lastSearchInput = searchInput.value
         resultsSection.style.display = 'flex'
@@ -61,20 +68,23 @@ const swiperGenre = SwiperFactory(
 
 const latestTotalResults = await fetchData(
     getDynamicUrl('GET_LATEST_MOVIES', { page: 1 }),
-    swiperLatest
+    swiperLatest,
+    latestPagination
 )
 latestSpan.textContent = `total : ${latestTotalResults}`
 
 const genreListTotalResults = await fetchData(
     getDynamicUrl('GET_GENRES_IDS', {}),
-    'GET_GENRES_IDS'
+    'GET_GENRES_IDS',
+    {}
 )
 
 //'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=28'
 //https://api.themoviedb.org/3/discover/movie?include_adult=false&language=en-US&page=0&sort_by=popularity.desc&with_genres=35
 const genreTotalResults = await fetchData(
     getDynamicUrl('SEARCH_MOVIES_BY_GENRE', { page: 1 }),
-    swiperGenre
+    swiperGenre,
+    genrePagination
 )
 genreSpan.textContent = `Comedy`
 genreListItems.forEach(function (item) {

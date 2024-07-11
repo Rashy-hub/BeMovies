@@ -82,7 +82,16 @@ export function getDynamicUrl(action, userParams = {}) {
     return url.toString()
 }
 
-export async function fetchData(requestURL, swiper) {
+export async function fetchData(
+    requestURL,
+    swiper,
+    swiperPagination = {
+        totalPage: 0,
+        actualPage: 0,
+        totalCount: 4,
+        lastSearchInput: '',
+    }
+) {
     const options = {
         method: 'GET',
         headers: {
@@ -114,7 +123,13 @@ export async function fetchData(requestURL, swiper) {
         })
 
         //pagination handling
-        if (swiper.el.classList.contains('swiper-container-result')) {
+
+        swiperPagination.totalPage = responseJson.total_pages
+        console.log(
+            `result total number of pages is equal to ${responseJson.total_pages}`
+        )
+
+        /*   if (swiper.el.classList.contains('swiper-container-result')) {
             resultsPagination.totalPage = responseJson.total_pages
             console.log(
                 `result total number of pages is equal to ${responseJson.total_pages}`
@@ -132,7 +147,7 @@ export async function fetchData(requestURL, swiper) {
                 `genre total number of pages is equal to ${responseJson.total_pages}`
             )
             genrePagination.actualPage = responseJson.page
-        }
+        } */
 
         //initializing or updating slides
         if (responseJson.page === 1) {
