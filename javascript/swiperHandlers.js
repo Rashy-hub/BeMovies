@@ -74,7 +74,7 @@ export function updateSlides(results, swiper) {
 export const loadMoreHandler = function (swiper) {
     console.log(`load more slides for this ${swiper.el} `)
 
-    if (swiper.el.classList.contains('swiper-container-results')) {
+    if (swiper.el.classList.contains('swiper-container-result')) {
         resultsPagination.actualPage++
         if (resultsPagination.actualPage > resultsPagination.totalPage)
             console.log('No mores pages to load for result swiper')
@@ -124,7 +124,7 @@ export const loadMoreHandler = function (swiper) {
 }
 
 const swiperOnInit = function (event) {
-    if (event.el.classList.contains('swiper-container-results')) {
+    if (event.el.classList.contains('swiper-container-result')) {
         console.log('swiper initialized in results section')
     } else if (event.el.classList.contains('swiper-container-latest')) {
         console.log('swiper initialized in latest section')

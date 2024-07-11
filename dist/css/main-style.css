@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 .header {
   max-width: 1440px;
   margin: auto;
@@ -18,7 +19,7 @@
 }
 
 .header__logo {
-  font-family: Inria Sans;
+  font-family: "Inria Sans";
   font-size: 36px;
   font-weight: 700;
   line-height: 43.16px;
@@ -82,7 +83,7 @@
 }
 
 .footer__logo {
-  font-family: Inria Sans;
+  font-family: "Inria Sans";
   font-size: 36px;
   font-weight: 700;
   line-height: 43.16px;
@@ -174,7 +175,7 @@ h1 {
 
 /*Section user interface*/
 .uisection {
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.36px;
@@ -203,7 +204,7 @@ h1 {
   opacity: 0px;
   -webkit-box-shadow: 4px 8px 20px 0px rgba(0, 0, 0, 0.25);
           box-shadow: 4px 8px 20px 0px rgba(0, 0, 0, 0.25);
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.36px;
@@ -231,7 +232,7 @@ h1 {
 
 /*Section results*/
 .results {
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.36px;
@@ -258,7 +259,7 @@ h1 {
   max-width: 1440px;
 }
 .results h2 {
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.36px;
@@ -284,7 +285,7 @@ h1 {
 
 /*latest section*/
 .latest {
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.36px;
@@ -312,7 +313,7 @@ h1 {
   margin-top: 50px;
 }
 .latest h2 {
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.36px;
@@ -334,7 +335,7 @@ h1 {
 
 /*genre section*/
 .genre {
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.36px;
@@ -362,14 +363,14 @@ h1 {
   margin-top: 50px;
 }
 .genre h2 {
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.36px;
   text-align: left;
 }
 .genre h3 {
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.36px;
@@ -394,7 +395,7 @@ h1 {
 }
 
 .genre__list {
-  font-family: Inter;
+  font-family: "Inter";
   font-size: 16px;
   font-weight: 400;
   line-height: 19.36px;

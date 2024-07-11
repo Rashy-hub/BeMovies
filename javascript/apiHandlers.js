@@ -114,7 +114,7 @@ export async function fetchData(requestURL, swiper) {
         })
 
         //pagination handling
-        if (swiper.el.classList.contains('swiper-container-results')) {
+        if (swiper.el.classList.contains('swiper-container-result')) {
             resultsPagination.totalPage = responseJson.total_pages
             console.log(
                 `result total number of pages is equal to ${responseJson.total_pages}`
