@@ -228,6 +228,7 @@ h1 {
   border: 0;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+  cursor: pointer;
 }
 
 /*Section results*/
@@ -411,6 +412,7 @@ h1 {
           align-items: center;
   list-style: none;
   gap: 2rem;
+  cursor: pointer;
 }
 
 .genre__list__item--active {
