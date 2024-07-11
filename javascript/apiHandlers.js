@@ -153,13 +153,13 @@ export async function fetchData(
         if (responseJson.page === 1) {
             console.log('first time loading images for the this query ')
             console.log(filtered_response)
-            initSlides(filtered_response, swiper)
+            initSlides(filtered_response, swiper, swiperPagination)
         } else {
             console.log(
                 'updating and loading more images after reaching end of swiper , page : ' +
                     responseJson.page
             )
-            updateSlides(filtered_response, swiper)
+            updateSlides(filtered_response, swiper, swiperPagination)
         }
 
         return responseJson.total_results

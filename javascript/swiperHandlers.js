@@ -10,7 +10,16 @@ import {
 
 //Swiper slides manipulation
 
-export function initSlides(results, swiper) {
+export function initSlides(
+    results,
+    swiper,
+    swiperPagination = {
+        totalPage: 0,
+        actualPage: 0,
+        totalCount: 4,
+        lastSearchInput: '',
+    }
+) {
     swiper.slideTo(0, 1, false)
     swiper.off('reachEnd', loadMoreHandler)
     swiper.removeAllSlides()
@@ -22,28 +31,23 @@ export function initSlides(results, swiper) {
     }
     swiper.on('reachEnd', loadMoreHandler)
     //pagination handling
-    if (swiper.el.classList.contains('swiper-container-result')) {
-        resultsPagination.totalCount = 0
-        resultsPagination.totalCount += results.length
-        console.log(
-            `totalCount of firstPage equal to ${resultsPagination.totalCount}`
-        )
-    } else if (swiper.el.classList.contains('swiper-container-latest')) {
-        latestPagination.totalCount = 0
-        latestPagination.totalCount += results.length
-        console.log(
-            `totalCount of firstPage equal to ${latestPagination.totalCount}`
-        )
-    } else if (swiper.el.classList.contains('swiper-container-genre')) {
-        genrePagination.totalCount = 0
-        genrePagination.totalCount += results.length
-        console.log(
-            `totalCount of firstPage equal to ${genrePagination.totalCount}`
-        )
-    }
+    swiperPagination.totalCount = 0
+    swiperPagination.totalCount += results.length
+    console.log(
+        `totalCount of firstPage equal to ${swiperPagination.totalCount}`
+    )
 }
 
-export function updateSlides(results, swiper) {
+export function updateSlides(
+    results,
+    swiper,
+    swiperPagination = {
+        totalPage: 0,
+        actualPage: 0,
+        totalCount: 4,
+        lastSearchInput: '',
+    }
+) {
     console.log(`swiper UPDATE with ${results.length} images`)
     for (let index = 0; index < results.length; index++) {
         const slide = `<div class="swiper-slide" ><img class="resultimages" src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
@@ -52,26 +56,25 @@ export function updateSlides(results, swiper) {
     }
 
     //pagination handling
-    if (swiper.el.classList.contains('swiper-container-result')) {
-        resultsPagination.totalCount += results.length
-        console.log(
-            `result totalCount now equal to ${resultsPagination.totalCount}`
-        )
-    } else if (swiper.el.classList.contains('swiper-container-latest')) {
-        latestPagination.totalCount += results.length
-        console.log(
-            `latest totalCount now equal to ${latestPagination.totalCount}`
-        )
-    } else if (swiper.el.classList.contains('swiper-container-genre')) {
-        genrePagination.totalCount += results.length
-        console.log(
-            `genre totalCount now equal to ${genrePagination.totalCount}`
-        )
-    }
+
+    swiperPagination.totalCount += results.length
+    console.log(
+        `${swiper.el.classList[0].split('-')[2]} totalCount now equal to ${
+            resultsPagination.totalCount
+        }`
+    )
 }
 //Swiper events handler
 
-export const loadMoreHandler = function (swiper) {
+export const loadMoreHandler = function (
+    swiper,
+    swiperPagination = {
+        totalPage: 0,
+        actualPage: 0,
+        totalCount: 4,
+        lastSearchInput: '',
+    }
+) {
     console.log(`load more slides for this ${swiper.el} `)
 
     if (swiper.el.classList.contains('swiper-container-result')) {
