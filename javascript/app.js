@@ -50,7 +50,15 @@ const searchSubmitHandler = async (event) => {
 }
 
 //Main Code
+
 searchButton.addEventListener('click', searchSubmitHandler)
+searchInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        console.log('Enter key pressed : simulate a click on button')
+        searchButton.click()
+    }
+})
+
 const swiperResult = SwiperFactory(
     '.swiper-container-result',
     '.result-swiper-buttons'
