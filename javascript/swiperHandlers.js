@@ -1,12 +1,6 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
-import {
-    resultsPagination,
-    genrePagination,
-    latestPagination,
-    fetchData,
-    getDynamicUrl,
-} from './apiHandlers.js'
+import { fetchData, getDynamicUrl } from './apiHandlers.js'
 
 //Swiper slides manipulation
 
@@ -18,24 +12,23 @@ export function initSlides(
         actualPage: 0,
         totalCount: 4,
         lastSearchInput: '',
+        lastApiAction: '',
     }
 ) {
     swiper.slideTo(0, 1, false)
     swiper.off('reachEnd', loadMoreHandler)
     swiper.removeAllSlides()
     for (let index = 0; index < results.length; index++) {
-        console.log(`creating ${results.length} new slide : `)
-        const slide = `<div class="swiper-slide" ><img class="resultimages" src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
+        const slide = `<div class="swiper-slide" ><img  src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
         swiper.appendSlide(slide)
         swiper.update()
     }
-    swiper.on('reachEnd', loadMoreHandler)
+    swiper.on('reachEnd', () => {
+        loadMoreHandler(swiper, swiperPagination)
+    })
     //pagination handling
     swiperPagination.totalCount = 0
     swiperPagination.totalCount += results.length
-    console.log(
-        `totalCount of firstPage equal to ${swiperPagination.totalCount}`
-    )
 }
 
 export function updateSlides(
@@ -50,7 +43,7 @@ export function updateSlides(
 ) {
     console.log(`swiper UPDATE with ${results.length} images`)
     for (let index = 0; index < results.length; index++) {
-        const slide = `<div class="swiper-slide" ><img class="resultimages" src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
+        const slide = `<div class="swiper-slide" ><img src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
 
         swiper.appendSlide(slide)
     }
@@ -60,69 +53,39 @@ export function updateSlides(
     swiperPagination.totalCount += results.length
     console.log(
         `${swiper.el.classList[0].split('-')[2]} totalCount now equal to ${
-            resultsPagination.totalCount
+            swiperPagination.totalCount
         }`
     )
 }
 //Swiper events handler
 
-export const loadMoreHandler = function (
+const loadMoreHandler = function (
     swiper,
     swiperPagination = {
         totalPage: 0,
         actualPage: 0,
         totalCount: 4,
         lastSearchInput: '',
+        lastApiAction: '',
     }
 ) {
-    console.log(`load more slides for this ${swiper.el} `)
+    console.log(`load more slides for this ${swiper.el.classList[0]} `)
 
-    if (swiper.el.classList.contains('swiper-container-result')) {
-        resultsPagination.actualPage++
-        if (resultsPagination.actualPage > resultsPagination.totalPage)
-            console.log('No mores pages to load for result swiper')
-        else {
-            fetchData(
-                getDynamicUrl('SEARCH_MOVIES_BY_NAME', {
-                    query: encodeURIComponent(
-                        resultsPagination.lastSearchInput
-                    ),
-                    page: resultsPagination.actualPage,
-                }),
-                swiper
-            )
-        }
-    } else if (swiper.el.classList.contains('swiper-container-latest')) {
-        latestPagination.actualPage++
-        if (latestPagination.actualPage > latestPagination.totalPage)
-            console.log('No mores pages to load for latest swiper')
-        else {
-            fetchData(
-                getDynamicUrl('GET_LATEST_MOVIES', {
-                    query: encodeURIComponent(
-                        resultsPagination.lastSearchInput
-                    ),
-                    page: latestPagination.actualPage,
-                }),
-                swiper
-            )
-        }
-    }
-    if (swiper.el.classList.contains('swiper-container-genre')) {
-        latestPagination.actualPage++
-        if (resultsPagination.actualPage > latestPagination.totalPage)
-            console.log('No mores pages to load for genre swiper')
-        else {
-            fetchData(
-                getDynamicUrl('SEARCH_MOVIES_BY_GENRE', {
-                    query: encodeURIComponent(
-                        resultsPagination.lastSearchInput
-                    ),
-                    page: latestPagination.actualPage,
-                }),
-                swiper
-            )
-        }
+    swiperPagination.actualPage++
+    if (swiperPagination.actualPage === 1) swiperPagination.actualPage++
+
+    if (swiperPagination.actualPage > swiperPagination.totalPage)
+        console.log(
+            `No mores pages to load for ${swiper.el.classList[0]} swiper`
+        )
+    else {
+        fetchData(
+            getDynamicUrl(swiperPagination.lastApiAction, {
+                query: encodeURIComponent(swiperPagination.lastSearchInput),
+                page: swiperPagination.actualPage,
+            }),
+            swiper
+        )
     }
 }
 

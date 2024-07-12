@@ -7,18 +7,21 @@ export let resultsPagination = {
     actualPage: 0,
     totalCount: 4,
     lastSearchInput: '',
+    lastApiAction: 'SEARCH_MOVIES_BY_NAME',
 }
 export let latestPagination = {
     totalPage: 0,
     actualPage: 0,
     totalCount: 4,
     lastSearchInput: '',
+    lastApiAction: 'GET_LATEST_MOVIES',
 }
 export let genrePagination = {
     totalPage: 0,
     actualPage: 0,
     totalCount: 4,
     lastSearchInput: '',
+    lastApiAction: 'SEARCH_MOVIES_BY_GENRE',
 }
 
 export const API_CONFIG = {
@@ -63,7 +66,7 @@ export const API_CONFIG = {
 
 export function getDynamicUrl(action, userParams = {}) {
     // Validate action
-    console.log(JSON.stringify(action))
+    console.log(`${JSON.stringify(action)} : Action received by getDynamicUrl `)
     if (!Object.keys(API_CONFIG).includes(action)) {
         throw new Error(`Invalid action: ${action}`)
     }
@@ -72,7 +75,13 @@ export function getDynamicUrl(action, userParams = {}) {
 
     // Get the configuration for the specified action
     const actionConfig = API_CONFIG[action]
-
+    console.log(
+        `Before building the url : params => ${JSON.stringify(
+            userParams,
+            null,
+            2
+        )}`
+    )
     const params = { ...actionConfig.params, ...userParams }
 
     // Construct URL with query parameters
@@ -90,6 +99,7 @@ export async function fetchData(
         actualPage: 0,
         totalCount: 4,
         lastSearchInput: '',
+        lastApiAction: '',
     }
 ) {
     const options = {
@@ -108,9 +118,12 @@ export async function fetchData(
 
         const responseJson = await response.json()
         //case were the request is not related to a swiper
-        if (swiper === 'GET_GENRES_IDS') {
+        if (
+            swiper === null &&
+            swiperPagination.lastApiAction === 'GET_GENRES_IDS'
+        ) {
             // in this case we need to store genre liste
-
+            console.log('GET_GENRES_IDS action is called to store genre list')
             updateDataSetGenreIds(responseJson)
             return responseJson.total_results
         }
@@ -125,14 +138,12 @@ export async function fetchData(
         //pagination handling
 
         swiperPagination.totalPage = responseJson.total_pages
-        console.log(
-            `result total number of pages is equal to ${responseJson.total_pages}`
-        )
+        console.log(`${responseJson.total_pages} : Total number of pages`)
 
         //initializing or updating slides
         if (responseJson.page === 1) {
-            console.log('first time loading images for the this query ')
-            console.log(filtered_response)
+            console.log('First time loading this query ')
+
             initSlides(filtered_response, swiper, swiperPagination)
         } else {
             console.log(
@@ -151,12 +162,8 @@ export async function fetchData(
 function updateDataSetGenreIds(response) {
     genreListItems.forEach(function (item) {
         response.genres.forEach((genre) => {
-            console.log(item.textContent)
             if (item.textContent === genre.name) {
                 item.dataset.genreid = genre.id
-                console.log(
-                    `creating dataset id ${item.dataset.genreid} for genre ${item.textContent}`
-                )
             }
         })
     })

@@ -83,8 +83,8 @@ latestSpan.textContent = `total : ${latestTotalResults}`
 
 const genreListTotalResults = await fetchData(
     getDynamicUrl('GET_GENRES_IDS', {}),
-    'GET_GENRES_IDS',
-    {}
+    null,
+    { lastApiAction: 'GET_GENRES_IDS' }
 )
 
 //'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=28'
@@ -98,9 +98,9 @@ genreSpan.textContent = `Comedy`
 genreListItems.forEach(function (item) {
     item.addEventListener('click', async function () {
         genreListItems.forEach(function (item) {
-            item.classList.remove('selectedGenre')
+            item.classList.remove('genre__list__item--active')
         })
-        item.classList.add('selectedGenre')
+        item.classList.add('genre__list__item--active')
 
         const genreTotalResults = await fetchData(
             getDynamicUrl('SEARCH_MOVIES_BY_GENRE', {
