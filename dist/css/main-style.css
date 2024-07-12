@@ -25,6 +25,7 @@
   line-height: 43.16px;
   text-align: left;
   text-transform: uppercase;
+  cursor: pointer;
   color: white;
 }
 .header__logo span {
@@ -89,6 +90,7 @@
   line-height: 43.16px;
   text-align: left;
   text-transform: uppercase;
+  cursor: pointer;
   color: white;
 }
 .footer__logo span {
