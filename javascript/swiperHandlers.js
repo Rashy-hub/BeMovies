@@ -1,6 +1,12 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
-import { fetchData, getDynamicUrl } from './apiHandlers.js'
+import {
+    fetchData,
+    genrePagination,
+    getDynamicUrl,
+    latestPagination,
+    resultsPagination,
+} from './apiHandlers.js'
 
 //Swiper slides manipulation
 
@@ -16,15 +22,21 @@ export function initSlides(
     }
 ) {
     swiper.slideTo(0, 1, false)
-    swiper.off('reachEnd', loadMoreHandler)
+    swiper.off('reachEnd', debouncedLoadMoreHandler)
     swiper.removeAllSlides()
     for (let index = 0; index < results.length; index++) {
         const slide = `<div class="swiper-slide" ><img  src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
         swiper.appendSlide(slide)
         swiper.update()
     }
-    swiper.on('reachEnd', () => {
-        loadMoreHandler(swiper, swiperPagination)
+
+    swiper.on('reachEnd', (swiper) => {
+        console.log(
+            `Swiper reach end event detected on ${swiper.el.classList[0]}`
+        )
+
+        let pagination = identifyPaginationReachEnd(swiper)
+        debouncedLoadMoreHandler(swiper, pagination)
     })
     //pagination handling
     swiperPagination.totalCount = 0
@@ -39,6 +51,7 @@ export function updateSlides(
         actualPage: 0,
         totalCount: 4,
         lastSearchInput: '',
+        lastApiAction: '',
     }
 ) {
     console.log(`swiper UPDATE with ${results.length} images`)
@@ -57,38 +70,44 @@ export function updateSlides(
         }`
     )
 }
+
+//deboucner for loadMoreHandler
+function debounce(func, wait) {
+    let timeout
+    return function (...args) {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => func.apply(this, args), wait)
+    }
+}
+
 //Swiper events handler
 
-const loadMoreHandler = function (
-    swiper,
-    swiperPagination = {
-        totalPage: 0,
-        actualPage: 0,
-        totalCount: 4,
-        lastSearchInput: '',
-        lastApiAction: '',
-    }
-) {
-    console.log(`load more slides for this ${swiper.el.classList[0]} `)
-
-    swiperPagination.actualPage++
-    if (swiperPagination.actualPage === 1) swiperPagination.actualPage++
-
+const loadMoreHandler = async function (swiper, swiperPagination) {
+    console.log(
+        `LOADMOREHANDLER PAGINATION OBJECT ${JSON.stringify(
+            swiperPagination,
+            null,
+            2
+        )} `
+    )
+    swiperPagination.actualPage += 1
     if (swiperPagination.actualPage > swiperPagination.totalPage)
         console.log(
             `No mores pages to load for ${swiper.el.classList[0]} swiper`
         )
     else {
-        fetchData(
+        console.log(`load more slides for this ${swiper.el.classList[0]} `)
+        const numberResult = await fetchData(
             getDynamicUrl(swiperPagination.lastApiAction, {
                 query: encodeURIComponent(swiperPagination.lastSearchInput),
                 page: swiperPagination.actualPage,
             }),
-            swiper
+            swiper,
+            swiperPagination
         )
     }
 }
-
+const debouncedLoadMoreHandler = debounce(loadMoreHandler, 300)
 const swiperOnInit = function (event) {
     const currentSwiper = event.el.classList[0].split('-')[2]
     if (!event.el.classList[0].startsWith('swiper-container-'))
@@ -136,4 +155,22 @@ export function SwiperFactory(containerClass, buttonsClass) {
         },
     })
     return swiper
+}
+
+function identifyPaginationReachEnd(swiper) {
+    let pagination
+    switch (swiper.el.classList[0]) {
+        case 'swiper-container-result':
+            pagination = resultsPagination
+            break
+        case 'swiper-container-latest':
+            pagination = latestPagination
+            break
+        case 'swiper-container-genre':
+            pagination = genrePagination
+            break
+        default:
+            console.warn('Unknown pagination :', swiper.el.classList[0])
+    }
+    return pagination
 }

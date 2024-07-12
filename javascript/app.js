@@ -90,18 +90,21 @@ const genreListTotalResults = await fetchData(
 //'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=28'
 //https://api.themoviedb.org/3/discover/movie?include_adult=false&language=en-US&page=0&sort_by=popularity.desc&with_genres=35
 const genreTotalResults = await fetchData(
-    getDynamicUrl('SEARCH_MOVIES_BY_GENRE', { page: 1 }),
+    getDynamicUrl('SEARCH_MOVIES_BY_GENRE', { page: 1, with_genres: 35 }),
     swiperGenre,
     genrePagination
 )
 genreSpan.textContent = `Comedy`
 genreListItems.forEach(function (item) {
-    item.addEventListener('click', async function () {
+    item.addEventListener('click', async function (event) {
+        event.stopPropagation()
+
         genreListItems.forEach(function (item) {
             item.classList.remove('genre__list__item--active')
         })
         item.classList.add('genre__list__item--active')
-
+        // genrePagination.actualPage = 1
+        genrePagination.actualPage = 1 // Reset the pagination for new genre
         const genreTotalResults = await fetchData(
             getDynamicUrl('SEARCH_MOVIES_BY_GENRE', {
                 page: 1,

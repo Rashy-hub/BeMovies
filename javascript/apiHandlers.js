@@ -87,6 +87,7 @@ export function getDynamicUrl(action, userParams = {}) {
     // Construct URL with query parameters
     let url = new URL(`${baseUrl}${actionConfig.endpoint}`)
     url.search = new URLSearchParams(params).toString() // Handle encoding automatically
+
     console.log(url.toString())
     return url.toString()
 }
