@@ -1,6 +1,5 @@
 import { initSlides, updateSlides } from './swiperHandlers.js'
 const genreListItems = document.querySelectorAll('.genre__list__item')
-const activeGenreItem = document.querySelector('.genre__list__item--active')
 //State management for pagination
 export let resultsPagination = {
     totalPage: 0,
@@ -34,8 +33,7 @@ export const API_CONFIG = {
             language: 'en-US',
         },
     },
-    //typical url : https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_date.lte=2024-07-01&sort_by=primary_release_date.desc
-    //              https://api.themoviedb.org/3/discover/movie?include_adult=false&language=en-US&page=1&primary_release_date_lte=2024-07-01&sort_by=primary_release_date.desc
+
     GET_LATEST_MOVIES: {
         endpoint: 'discover/movie',
         params: {
@@ -50,7 +48,7 @@ export const API_CONFIG = {
         endpoint: 'genre/movie/list',
         params: { language: 'en' },
     },
-    //'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=28'
+
     SEARCH_MOVIES_BY_GENRE: {
         endpoint: 'discover/movie',
         params: {
@@ -66,7 +64,7 @@ export const API_CONFIG = {
 
 export function getDynamicUrl(action, userParams = {}) {
     // Validate action
-    console.log(`${JSON.stringify(action)} : Action received by getDynamicUrl `)
+
     if (!Object.keys(API_CONFIG).includes(action)) {
         throw new Error(`Invalid action: ${action}`)
     }
@@ -75,19 +73,11 @@ export function getDynamicUrl(action, userParams = {}) {
 
     // Get the configuration for the specified action
     const actionConfig = API_CONFIG[action]
-    console.log(
-        `Before building the url : params => ${JSON.stringify(
-            userParams,
-            null,
-            2
-        )}`
-    )
     const params = { ...actionConfig.params, ...userParams }
 
     // Construct URL with query parameters
     let url = new URL(`${baseUrl}${actionConfig.endpoint}`)
     url.search = new URLSearchParams(params).toString() // Handle encoding automatically
-
     console.log(url.toString())
     return url.toString()
 }
@@ -114,8 +104,6 @@ export async function fetchData(
 
     try {
         const response = await fetch(requestURL, options)
-        //`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(searchValue)}&include_adult=false&language=en-US&page=${page}`
-        // "https://api.themoviedb.org/3/search/movie?searchValue=test&page=1&include_adult=false&language=en-US"
 
         const responseJson = await response.json()
         //case were the request is not related to a swiper
@@ -124,7 +112,7 @@ export async function fetchData(
             swiperPagination.lastApiAction === 'GET_GENRES_IDS'
         ) {
             // in this case we need to store genre liste
-            console.log('GET_GENRES_IDS action is called to store genre list')
+
             updateDataSetGenreIds(responseJson)
             return responseJson.total_results
         }
@@ -139,18 +127,11 @@ export async function fetchData(
         //pagination handling
 
         swiperPagination.totalPage = responseJson.total_pages
-        console.log(`${responseJson.total_pages} : Total number of pages`)
 
         //initializing or updating slides
         if (responseJson.page === 1) {
-            console.log('First time loading this query ')
-
             initSlides(filtered_response, swiper, swiperPagination)
         } else {
-            console.log(
-                'updating and loading more images after reaching end of swiper , page : ' +
-                    responseJson.page
-            )
             updateSlides(filtered_response, swiper, swiperPagination)
         }
 

@@ -31,10 +31,6 @@ export function initSlides(
     }
 
     swiper.on('reachEnd', (swiper) => {
-        console.log(
-            `Swiper reach end event detected on ${swiper.el.classList[0]}`
-        )
-
         let pagination = identifyPaginationReachEnd(swiper)
         debouncedLoadMoreHandler(swiper, pagination)
     })
@@ -54,7 +50,6 @@ export function updateSlides(
         lastApiAction: '',
     }
 ) {
-    console.log(`swiper UPDATE with ${results.length} images`)
     for (let index = 0; index < results.length; index++) {
         const slide = `<div class="swiper-slide" ><img src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
 
@@ -64,11 +59,6 @@ export function updateSlides(
     //pagination handling
 
     swiperPagination.totalCount += results.length
-    console.log(
-        `${swiper.el.classList[0].split('-')[2]} totalCount now equal to ${
-            swiperPagination.totalCount
-        }`
-    )
 }
 
 //deboucner for loadMoreHandler
@@ -83,20 +73,12 @@ function debounce(func, wait) {
 //Swiper events handler
 
 const loadMoreHandler = async function (swiper, swiperPagination) {
-    console.log(
-        `LOADMOREHANDLER PAGINATION OBJECT ${JSON.stringify(
-            swiperPagination,
-            null,
-            2
-        )} `
-    )
     swiperPagination.actualPage += 1
     if (swiperPagination.actualPage > swiperPagination.totalPage)
         console.log(
             `No mores pages to load for ${swiper.el.classList[0]} swiper`
         )
     else {
-        console.log(`load more slides for this ${swiper.el.classList[0]} `)
         const numberResult = await fetchData(
             getDynamicUrl(swiperPagination.lastApiAction, {
                 query: encodeURIComponent(swiperPagination.lastSearchInput),

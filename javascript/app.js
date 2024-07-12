@@ -31,7 +31,6 @@ const searchSubmitHandler = async (event) => {
         resultsSection.style.display = 'none'
         return
     } else {
-        console.log('searching for ' + searchInput.value)
         // resultsPagination.totalCount = 0
         totalResults = await fetchData(
             getDynamicUrl('SEARCH_MOVIES_BY_NAME', {
@@ -55,7 +54,6 @@ const searchSubmitHandler = async (event) => {
 searchButton.addEventListener('click', searchSubmitHandler)
 searchInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        console.log('Enter key pressed : simulate a click on button')
         searchButton.click()
     }
 })
@@ -88,8 +86,6 @@ const genreListTotalResults = await fetchData(
     { lastApiAction: 'GET_GENRES_IDS' }
 )
 
-//'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=28'
-//https://api.themoviedb.org/3/discover/movie?include_adult=false&language=en-US&page=0&sort_by=popularity.desc&with_genres=35
 const genreTotalResults = await fetchData(
     getDynamicUrl('SEARCH_MOVIES_BY_GENRE', { page: 1, with_genres: 35 }),
     swiperGenre,
