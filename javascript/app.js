@@ -16,6 +16,7 @@ const genreSpan = document.querySelector('.genre h2 span')
 
 const genreListItems = document.querySelectorAll('.genre__list__item')
 const activeGenreItem = document.querySelector('.genre__list__item--active')
+const genreSubTitle = document.querySelector('.genre__subtitle span')
 
 //const resultsImages = document.querySelectorAll('.resultimages')
 
@@ -94,7 +95,9 @@ const genreTotalResults = await fetchData(
     swiperGenre,
     genrePagination
 )
-genreSpan.textContent = `Comedy`
+genreSpan.textContent = `Comedy - ${genreTotalResults}`
+
+genreSubTitle.textContent = genreListItems[0].textContent
 genreListItems.forEach(function (item) {
     item.addEventListener('click', async function (event) {
         event.stopPropagation()
@@ -114,5 +117,6 @@ genreListItems.forEach(function (item) {
             genrePagination
         )
         genreSpan.textContent = `${item.textContent} - Total ${genreTotalResults} results`
+        genreSubTitle.textContent = item.textContent
     })
 })
