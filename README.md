@@ -16,6 +16,7 @@ This is a Movie Swiper application that allows users to search for movies, view 
 
 ## TODOs
 
+-   **Responsive Design** : Mtliplateform adapted style for a better user experience
 -   **Login/Signup PoPup** : Show a connection popup
 -   **On Hover Card** : Show detailed information of a movie when hover
 -   **Error Display**: Improve error handling and display user-friendly error messages.
