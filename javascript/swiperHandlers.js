@@ -1,14 +1,10 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
-import {
-    fetchData,
-    genrePagination,
-    getDynamicUrl,
-    latestPagination,
-    resultsPagination,
-} from './apiHandlers.js'
+import { fetchData, getDynamicUrl } from './apiHandlers.js'
 
 //Swiper slides manipulation
+
+const swiperPaginationState = []
 
 export function initSlides(
     results,
@@ -21,6 +17,8 @@ export function initSlides(
         lastApiAction: '',
     }
 ) {
+    swiperPaginationState.push(swiperPagination)
+    swiperPagination
     swiper.slideTo(0, 1, false)
     swiper.off('reachEnd', debouncedLoadMoreHandler)
     swiper.removeAllSlides()
@@ -32,6 +30,7 @@ export function initSlides(
 
     swiper.on('reachEnd', (swiper) => {
         let pagination = identifyPaginationReachEnd(swiper)
+
         debouncedLoadMoreHandler(swiper, pagination)
     })
     //pagination handling
@@ -74,6 +73,7 @@ function debounce(func, wait) {
 
 const loadMoreHandler = async function (swiper, swiperPagination) {
     swiperPagination.actualPage += 1
+
     if (swiperPagination.actualPage > swiperPagination.totalPage)
         console.log(
             `No mores pages to load for ${swiper.el.classList[0]} swiper`
@@ -84,8 +84,7 @@ const loadMoreHandler = async function (swiper, swiperPagination) {
                 query: encodeURIComponent(swiperPagination.lastSearchInput),
                 page: swiperPagination.actualPage,
             }),
-            swiper,
-            swiperPagination
+            { swiper, swiperPagination }
         )
     }
 }
@@ -100,7 +99,17 @@ const swiperOnInit = function (event) {
 }
 
 // Swiper factory that helps create multiple independant swipers
-export function SwiperFactory(containerClass, buttonsClass) {
+export function SwiperFactory(
+    containerClass,
+    buttonsClass,
+    {
+        totalPage = 0,
+        actualPage = 0,
+        totalCount = 4,
+        lastSearchInput = '',
+        ApiAction,
+    }
+) {
     const swiper = new Swiper(containerClass, {
         // Optional parameters
         direction: 'horizontal',
@@ -136,23 +145,27 @@ export function SwiperFactory(containerClass, buttonsClass) {
             init: swiperOnInit,
         },
     })
-    return swiper
+
+    let swiperPagination = {
+        totalPage: totalPage,
+        actualPage: actualPage,
+        totalCount: totalCount,
+        lastSearchInput: lastSearchInput,
+        lastApiAction: ApiAction,
+        swiperContainer: containerClass,
+    }
+    return { swiper, swiperPagination }
 }
 
 function identifyPaginationReachEnd(swiper) {
-    let pagination
-    switch (swiper.el.classList[0]) {
-        case 'swiper-container-result':
-            pagination = resultsPagination
-            break
-        case 'swiper-container-latest':
-            pagination = latestPagination
-            break
-        case 'swiper-container-genre':
-            pagination = genrePagination
-            break
-        default:
-            console.warn('Unknown pagination :', swiper.el.classList[0])
+    let pagination = null
+    for (const element of swiperPaginationState) {
+        if (
+            `${element.swiperContainer.toString()}` ===
+            `.${swiper.el.classList[0].toString()}`
+        )
+            pagination = element
     }
+
     return pagination
 }

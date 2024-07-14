@@ -1,10 +1,4 @@
-import {
-    fetchData,
-    getDynamicUrl,
-    resultsPagination,
-    genrePagination,
-    latestPagination,
-} from './apiHandlers.js'
+import { fetchData, getDynamicUrl } from './apiHandlers.js'
 import { SwiperFactory } from './swiperHandlers.js'
 
 const searchInput = document.querySelector('#search_input')
@@ -37,10 +31,9 @@ const searchSubmitHandler = async (event) => {
                 query: encodeURIComponent(searchInput.value),
                 page: 1,
             }),
-            swiperResult,
-            resultsPagination
+            swiperResult
         )
-        resultsPagination.lastSearchInput = searchInput.value
+        swiperResult.swiperPagination.lastSearchInput = searchInput.value
         resultsSection.style.display = 'flex'
     }
     resultSpan.textContent = `${searchInput.value} - total : ${totalResults}`
@@ -60,36 +53,36 @@ searchInput.addEventListener('keydown', (event) => {
 
 const swiperResult = SwiperFactory(
     '.swiper-container-result',
-    '.result-swiper-buttons'
+    '.result-swiper-buttons',
+    { ApiAction: 'SEARCH_MOVIES_BY_GENRE' }
 )
 const swiperLatest = SwiperFactory(
     '.swiper-container-latest',
-    '.latest-swiper-buttons'
+    '.latest-swiper-buttons',
+    { ApiAction: 'GET_LATEST_MOVIES' }
 )
 const swiperGenre = SwiperFactory(
     '.swiper-container-genre',
-    '.genre-swiper-buttons'
+    '.genre-swiper-buttons',
+    { ApiAction: 'SEARCH_MOVIES_BY_GENRE' }
 )
 
 //load latest swiper
 
 const latestTotalResults = await fetchData(
     getDynamicUrl('GET_LATEST_MOVIES', { page: 1 }),
-    swiperLatest,
-    latestPagination
+    swiperLatest
 )
 latestSpan.textContent = `total : ${latestTotalResults}`
 
 const genreListTotalResults = await fetchData(
     getDynamicUrl('GET_GENRES_IDS', {}),
-    null,
-    { lastApiAction: 'GET_GENRES_IDS' }
+    { swiper: null, swiperPagination: { lastApiAction: 'GET_GENRES_IDS' } }
 )
 
 const genreTotalResults = await fetchData(
     getDynamicUrl('SEARCH_MOVIES_BY_GENRE', { page: 1, with_genres: 35 }),
-    swiperGenre,
-    genrePagination
+    swiperGenre
 )
 genreSpan.textContent = `Comedy - ${genreTotalResults}`
 
@@ -103,14 +96,13 @@ genreListItems.forEach(function (item) {
         })
         item.classList.add('genre__list__item--active')
         // genrePagination.actualPage = 1
-        genrePagination.actualPage = 1 // Reset the pagination for new genre
+        swiperGenre.swiperPagination.actualPage = 1 // Reset the pagination for new genre
         const genreTotalResults = await fetchData(
             getDynamicUrl('SEARCH_MOVIES_BY_GENRE', {
                 page: 1,
                 with_genres: item.dataset.genreid,
             }),
-            swiperGenre,
-            genrePagination
+            swiperGenre
         )
         genreSpan.textContent = `${item.textContent} - Total ${genreTotalResults} results`
         genreSubTitle.textContent = item.textContent

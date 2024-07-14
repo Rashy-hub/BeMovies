@@ -1,27 +1,5 @@
 import { initSlides, updateSlides } from './swiperHandlers.js'
 const genreListItems = document.querySelectorAll('.genre__list__item')
-//State management for pagination
-export let resultsPagination = {
-    totalPage: 0,
-    actualPage: 0,
-    totalCount: 4,
-    lastSearchInput: '',
-    lastApiAction: 'SEARCH_MOVIES_BY_NAME',
-}
-export let latestPagination = {
-    totalPage: 0,
-    actualPage: 0,
-    totalCount: 4,
-    lastSearchInput: '',
-    lastApiAction: 'GET_LATEST_MOVIES',
-}
-export let genrePagination = {
-    totalPage: 0,
-    actualPage: 0,
-    totalCount: 4,
-    lastSearchInput: '',
-    lastApiAction: 'SEARCH_MOVIES_BY_GENRE',
-}
 
 export const API_CONFIG = {
     SEARCH_MOVIES_BY_NAME: {
@@ -82,17 +60,7 @@ export function getDynamicUrl(action, userParams = {}) {
     return url.toString()
 }
 
-export async function fetchData(
-    requestURL,
-    swiper,
-    swiperPagination = {
-        totalPage: 0,
-        actualPage: 0,
-        totalCount: 4,
-        lastSearchInput: '',
-        lastApiAction: '',
-    }
-) {
+export async function fetchData(requestURL, { swiper, swiperPagination }) {
     const options = {
         method: 'GET',
         headers: {
