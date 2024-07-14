@@ -65,12 +65,19 @@ export async function fetchData(requestURL, { swiper, swiperPagination }) {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOTBjOTI1NzdhYjUyZTUxNThmYWU0MGYxMDdkMzBjOCIsInN1YiI6IjY2NzE5MzgzZTA3ZmFmZjAzNTcyZWZhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ztStLJqy8UtW95RrD6ie8sIpBORWWgbdk32o9Zxx9HQ',
         },
     }
 
     try {
+        // Read bearer token from api.json securely
+        const jsonKeys = await fetch('utils/api.json')
+        const jsonKeysData = await jsonKeys.json()
+
+        if (!jsonKeysData || !jsonKeysData.bearer) {
+            throw new Error('Missing bearer token in api.json')
+        }
+
+        options.headers.Authorization = `Bearer ${jsonKeysData.bearer}`
         const response = await fetch(requestURL, options)
 
         const responseJson = await response.json()
