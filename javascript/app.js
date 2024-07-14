@@ -9,7 +9,6 @@ const latestSpan = document.querySelector('.latest h2 span')
 const genreSpan = document.querySelector('.genre h2 span')
 
 const genreListItems = document.querySelectorAll('.genre__list__item')
-const activeGenreItem = document.querySelector('.genre__list__item--active')
 const genreSubTitle = document.querySelector('.genre__subtitle span')
 
 //const resultsImages = document.querySelectorAll('.resultimages')
