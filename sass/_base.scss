@@ -61,6 +61,14 @@
     border-radius: 0px 8px 8px 0px;
     opacity: 0px;
 }
+@mixin button-font-login {
+    font-family: 'Inria Sans';
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28.78px;
+    letter-spacing: 0.03em;
+    text-align: left;
+}
 $primary-background: #191b20;
 
 $secondary_background: rgba(20, 21, 23, 1);

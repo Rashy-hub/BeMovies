@@ -1,4 +1,5 @@
 import { fetchData, getDynamicUrl } from './apiHandlers.js'
+import { loginHandler } from './modalHandlers.js'
 import { SwiperFactory } from './swiperHandlers.js'
 
 const searchInput = document.querySelector('#search_input')
@@ -53,7 +54,7 @@ searchInput.addEventListener('keydown', (event) => {
 const swiperResult = SwiperFactory(
     '.swiper-container-result',
     '.result-swiper-buttons',
-    { ApiAction: 'SEARCH_MOVIES_BY_GENRE' }
+    { ApiAction: 'SEARCH_MOVIES_BY_NAME' }
 )
 const swiperLatest = SwiperFactory(
     '.swiper-container-latest',
@@ -107,3 +108,7 @@ genreListItems.forEach(function (item) {
         genreSubTitle.textContent = item.textContent
     })
 })
+
+/* Event listener for modal signup/login */
+
+loginHandler()

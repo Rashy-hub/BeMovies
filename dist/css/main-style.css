@@ -120,6 +120,150 @@
   color: gold;
 }
 
+.hidden {
+  display: none;
+}
+
+.login-dialog {
+  position: fixed;
+  height: 608px;
+  width: 410px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: black;
+}
+
+.login-dialog__content {
+  height: 100%;
+  width: 100%;
+  color: white;
+  padding: 61px;
+}
+
+.login-dialog__form-container {
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.36px;
+  text-align: left;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login-dialog__close-button img {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 10px;
+  left: 10px;
+}
+
+.login-dialog::-ms-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px); /* Modern browsers */
+  filter: blur(5px); /* Fallback for older browsers */
+}
+
+.login-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px); /* Modern browsers */
+  -webkit-filter: blur(5px);
+          filter: blur(5px); /* Fallback for older browsers */
+}
+
+.login-dialog__switch-buttons-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 80px;
+  gap: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login-dialog__switch-button {
+  font-family: "Inria Sans";
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28.78px;
+  letter-spacing: 0.03em;
+  text-align: left;
+  padding: 10px 25px;
+}
+
+.login-dialog__switch-button--active {
+  background-color: red;
+}
+
+.login-dialog__switch-button--login {
+  border: 1px solid black;
+  border-left: 0px;
+  border-radius: 0px 8px 8px 0px;
+}
+
+.login-dialog__switch-button--signup {
+  border: 0px;
+  text-wrap: nowrap;
+  border-radius: 8px 0px 0px 8px;
+}
+
+.login-dialog__form-field {
+  width: 288px;
+  height: 44px;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.login-dialog__form-field::-webkit-input-placeholder {
+  color: black;
+}
+
+.login-dialog__form-field::-moz-placeholder {
+  color: black;
+}
+
+.login-dialog__form-field:-ms-input-placeholder {
+  color: black;
+}
+
+.login-dialog__form-field::-ms-input-placeholder {
+  color: black;
+}
+
+.login-dialog__form-field::placeholder {
+  color: black;
+}
+
+.login-dialog__forgot-password {
+  color: red;
+}
+
+.login-dialog__not-member-yet a {
+  text-decoration: none;
+  color: red;
+}
+
 *,
 *::before,
 *::after {

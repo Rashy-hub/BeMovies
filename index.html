@@ -19,11 +19,81 @@
             <div class="header__logo"><span>Be</span>Movies</div>
             <nav class="header__nav">
                 <a href="#results">search</a><a href="#latest">latest</a
-                ><a href="#genre">genres</a> <a href="">register</a
-                ><a href="">signin</a>
+                ><a href="#genre">genres</a>
+                <a href="#" id="open-login-dialog">login</a>
+                <a href="#" id="open-login-dialog">signin</a>
             </nav>
         </header>
         <main class="main">
+            <!-- This is out of the flow , it is the Login/signup Modal dialog box -->
+            <dialog id="login-dialog" class="login-dialog">
+                <div class="login-dialog__content">
+                    <div
+                        class="login-dialog__close-button"
+                        id="login-close-button"
+                    >
+                        <img
+                            src="./assets/close.svg"
+                            alt="Close Login Dialog"
+                            id="close-svg"
+                        />
+                    </div>
+                    <div class="login-dialog__form-container">
+                        <div class="login-dialog__switch-buttons-container">
+                            <button
+                                class="login-dialog__switch-button login-dialog__switch-button--signup"
+                            >
+                                SIGN UP
+                            </button>
+                            <button
+                                class="login-dialog__switch-button login-dialog__switch-button--login login-dialog__switch-button--active"
+                            >
+                                LOGIN
+                            </button>
+                        </div>
+                        <form class="login-dialog__form">
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                class="login-dialog__form-field login-dialog__form-field--username"
+                                required
+                            />
+                            <input
+                                type="text"
+                                placeholder="Password"
+                                class="login-dialog__form-field login-dialog__form-field--password"
+                                required
+                            />
+                            <div class="login-dialog__checkbox-container">
+                                <input
+                                    type="checkbox"
+                                    name="remember"
+                                    id="remember"
+                                    class="login-dialog__checkbox"
+                                />
+                                <label
+                                    for="remember"
+                                    class="login-dialog__checkbox-label"
+                                    >Remember me</label
+                                >
+                            </div>
+                            <button
+                                type="submit"
+                                class="login-dialog__login-button"
+                            >
+                                LOGIN
+                            </button>
+                        </form>
+                        <a href="#" class="login-dialog__forgot-password"
+                            >I forgot my password</a
+                        >
+                        <p class="login-dialog__not-member-yet">
+                            Not a member yet? <a href="#">Sign up</a>
+                        </p>
+                    </div>
+                </div>
+            </dialog>
+            <!-- Sections html start from here -->
             <section class="uisection">
                 <input
                     type="text"

@@ -70,8 +70,10 @@ export async function fetchData(requestURL, { swiper, swiperPagination }) {
 
     try {
         let jsonKeysData = { bearer: '' }
+
+        //!uncomment in order to use the correct api key
         // Read bearer token from api.json securely
-        fetch('../utils/api.json').then(async (response) => {
+        /*      fetch('../utils/api.json').then(async (response) => {
             if (response.ok) {
                 jsonKeysData = await response.json()
                 //console.log('File found!')
@@ -80,12 +82,13 @@ export async function fetchData(requestURL, { swiper, swiperPagination }) {
                     'Error fetching utils/api.json file:',
                     response.status
                 )
-                //!for the moment use my local key anyway even if api.json not found , do not forget to adapt when deployed for prod
-                jsonKeysData.bearer =
-                    'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOTBjOTI1NzdhYjUyZTUxNThmYWU0MGYxMDdkMzBjOCIsInN1YiI6IjY2NzE5MzgzZTA3ZmFmZjAzNTcyZWZhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ztStLJqy8UtW95RrD6ie8sIpBORWWgbdk32o9Zxx9HQ'
+              
             }
-        })
+        }) */
 
+        //!for the moment use my local key anyway even if api.json not found , do not forget to adapt when deployed for prod
+        jsonKeysData.bearer =
+            'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOTBjOTI1NzdhYjUyZTUxNThmYWU0MGYxMDdkMzBjOCIsInN1YiI6IjY2NzE5MzgzZTA3ZmFmZjAzNTcyZWZhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ztStLJqy8UtW95RrD6ie8sIpBORWWgbdk32o9Zxx9HQ'
         options.headers.Authorization = `Bearer ${jsonKeysData.bearer}`
         const response = await fetch(requestURL, options)
 
