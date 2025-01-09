@@ -1,6 +1,6 @@
 import { initSlides, updateSlides } from './swiperHandlers.js'
 const genreListItems = document.querySelectorAll('.genre__list__item')
-
+let genresArray = []
 export const API_CONFIG = {
     SEARCH_MOVIES_BY_NAME: {
         endpoint: 'search/movie',
@@ -11,6 +11,10 @@ export const API_CONFIG = {
             language: 'en-US',
         },
     },
+    GET_MOVIE_DETAILS: {
+        endpoint: 'movie/{movie_id}',
+        params: { language: 'en-US' }, // tu peux adapter les paramètres selon les besoins
+    },
 
     GET_LATEST_MOVIES: {
         endpoint: 'discover/movie',
@@ -18,7 +22,8 @@ export const API_CONFIG = {
             include_adult: false,
             language: 'en-US',
             page: 0,
-            'primary_release_date.lte': new Date().toISOString().slice(0, 10),
+            region: 'Belgium',
+            'primary_release_date.lte': '2023-01-09',
             sort_by: 'primary_release_date.desc',
         },
     },
@@ -32,6 +37,7 @@ export const API_CONFIG = {
         params: {
             include_adult: false,
             include_video: false,
+            region: 'Belgium',
             language: 'en-US',
             page: 0,
             sort_by: 'popularity.desc',
@@ -40,23 +46,28 @@ export const API_CONFIG = {
     },
 }
 
-export function getDynamicUrl(action, userParams = {}) {
-    // Validate action
-
+export function getDynamicUrl(action, userParams = {}, id = '') {
     if (!Object.keys(API_CONFIG).includes(action)) {
         throw new Error(`Invalid action: ${action}`)
     }
 
     const baseUrl = 'https://api.themoviedb.org/3/'
 
-    // Get the configuration for the specified action
     const actionConfig = API_CONFIG[action]
     const params = { ...actionConfig.params, ...userParams }
 
-    // Construct URL with query parameters
     let url = new URL(`${baseUrl}${actionConfig.endpoint}`)
-    url.search = new URLSearchParams(params).toString() // Handle encoding automatically
-    console.log(url.toString())
+    url.pathname = url.pathname.replace('%7Bmovie_id%7D', id)
+    //https://api.themoviedb.org/3/movie/1318930?language=en-US
+    //https://api.themoviedb.org/3/movie/?language=en-US&movie_id=1318930
+    console.log(url)
+    if (url.pathname.includes('%7Bmovie_id%7D')) {
+        console.log('url includes movie_id ' + userParams.movie_id)
+        url.pathname = url.pathname.replace('{movie_id}', userParams.movie_id)
+    }
+
+    url.search = new URLSearchParams(params).toString()
+
     return url.toString()
 }
 
@@ -90,6 +101,7 @@ export async function fetchData(requestURL, { swiper, swiperPagination }) {
         jsonKeysData.bearer =
             'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOTBjOTI1NzdhYjUyZTUxNThmYWU0MGYxMDdkMzBjOCIsInN1YiI6IjY2NzE5MzgzZTA3ZmFmZjAzNTcyZWZhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ztStLJqy8UtW95RrD6ie8sIpBORWWgbdk32o9Zxx9HQ'
         options.headers.Authorization = `Bearer ${jsonKeysData.bearer}`
+
         const response = await fetch(requestURL, options)
 
         const responseJson = await response.json()
@@ -116,10 +128,16 @@ export async function fetchData(requestURL, { swiper, swiperPagination }) {
         swiperPagination.totalPage = responseJson.total_pages
 
         //initializing or updating slides
+
         if (responseJson.page === 1) {
-            initSlides(filtered_response, swiper, swiperPagination)
+            initSlides(filtered_response, swiper, swiperPagination, genresArray)
         } else {
-            updateSlides(filtered_response, swiper, swiperPagination)
+            updateSlides(
+                filtered_response,
+                swiper,
+                swiperPagination,
+                genresArray
+            )
         }
 
         return responseJson.total_results
@@ -128,7 +146,34 @@ export async function fetchData(requestURL, { swiper, swiperPagination }) {
     }
 }
 
+export async function fetchDetails(url) {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+        },
+    }
+
+    try {
+        let jsonKeysData = { bearer: '' }
+
+        jsonKeysData.bearer =
+            'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOTBjOTI1NzdhYjUyZTUxNThmYWU0MGYxMDdkMzBjOCIsInN1YiI6IjY2NzE5MzgzZTA3ZmFmZjAzNTcyZWZhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ztStLJqy8UtW95RrD6ie8sIpBORWWgbdk32o9Zxx9HQ'
+        options.headers.Authorization = `Bearer ${jsonKeysData.bearer}`
+
+        const response = await fetch(url, options)
+
+        const responseJson = await response.json()
+        console.log(JSON.stringify(responseJson))
+
+        return responseJson
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 function updateDataSetGenreIds(response) {
+    genresArray = response.genres
     genreListItems.forEach(function (item) {
         response.genres.forEach((genre) => {
             if (item.textContent === genre.name) {

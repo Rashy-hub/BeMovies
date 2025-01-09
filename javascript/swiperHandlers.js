@@ -1,7 +1,7 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
-import { fetchData, getDynamicUrl } from './apiHandlers.js'
-
+import { fetchData, getDynamicUrl, fetchDetails } from './apiHandlers.js'
+import { movieDetailsHandler } from './modalHandlers.js'
 //Swiper slides manipulation
 
 const swiperPaginationState = []
@@ -15,17 +15,67 @@ export function initSlides(
         totalCount: 4,
         lastSearchInput: '',
         lastApiAction: '',
-    }
+    },
+    genresArray
 ) {
     swiperPaginationState.push(swiperPagination)
     swiperPagination
     swiper.slideTo(0, 1, false)
     swiper.off('reachEnd', debouncedLoadMoreHandler)
     swiper.removeAllSlides()
+    console.log(genresArray)
     for (let index = 0; index < results.length; index++) {
-        const slide = `<div class="swiper-slide" ><img  src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
+        const slide = `
+  <div class="swiper-slide">
+  <img src="https://image.tmdb.org/t/p/original/${
+      results[index].poster_path
+  }" loading="lazy" alt="${
+            results[index].original_title || 'Titre non disponible'
+        }" />
+  <div class="overlay" id="${results[index].id}">
+    <h3>${results[index].original_title || 'Titre non disponible'}</h3>
+    <p class="overlay_date">${
+        results[index].release_date
+            ? results[index].release_date.slice(0, 4)
+            : 'Inconnue'
+    }</p>
+    <p class="overlay_genres">
+      ${
+          genresArray
+              .filter(
+                  (genre) =>
+                      results[index].genre_ids &&
+                      results[index].genre_ids.includes(genre.id)
+              )
+              .slice(0, 3)
+              .map((genre) => genre.name)
+              .join('/') || 'Genres non disponibles'
+      }
+    </p>
+    <div class="overlay_note"><img src="/assets/star.svg" /> ${
+        results[index].vote_average
+            ? results[index].vote_average.toFixed(1)
+            : '0.0'
+    }</div>
+  </div>
+  <div class="swiper-lazy-preloader"></div>
+</div>
+`
+
         swiper.appendSlide(slide)
         swiper.update()
+
+        const overlay = document.getElementById(results[index].id)
+        overlay.addEventListener('click', async () => {
+            const movieId = results[index].id
+            const movieDetailsUrl = getDynamicUrl(
+                'GET_MOVIE_DETAILS',
+                {},
+                movieId
+            )
+            const movieDetails = await fetchDetails(movieDetailsUrl)
+            movieDetailsHandler(movieDetails)
+        })
     }
 
     swiper.on('reachEnd', (swiper) => {
@@ -47,12 +97,61 @@ export function updateSlides(
         totalCount: 4,
         lastSearchInput: '',
         lastApiAction: '',
-    }
+    },
+    genresArray
 ) {
+    console.log(genresArray)
     for (let index = 0; index < results.length; index++) {
-        const slide = `<div class="swiper-slide" ><img src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
+        const slide = `<div class="swiper-slide">
+  <img src="https://image.tmdb.org/t/p/original/${
+      results[index].poster_path
+  }" loading="lazy" alt="${
+            results[index].original_title || 'Titre non disponible'
+        }" />
+  <div class="overlay" id="${results[index].id}">
+    <h3>${results[index].original_title || 'Titre non disponible'}</h3>
+    <p class="overlay_date">${
+        results[index].release_date
+            ? results[index].release_date.slice(0, 4)
+            : 'Inconnue'
+    }</p>
+    <p class="overlay_genres">
+      ${
+          genresArray
+              .filter(
+                  (genre) =>
+                      results[index].genre_ids &&
+                      results[index].genre_ids.includes(genre.id)
+              )
+              .slice(0, 3)
+              .map((genre) => genre.name)
+              .join('/') || 'Genres non disponibles'
+      }
+    </p>
+    <div class="overlay_note"><img src="/assets/star.svg" /> ${
+        results[index].vote_average
+            ? results[index].vote_average.toFixed(1)
+            : '0.0'
+    }</div>
+  </div>
+  <div class="swiper-lazy-preloader"></div>
+</div>
+`
 
         swiper.appendSlide(slide)
+
+        const overlay = document.getElementById(results[index].id)
+        overlay.addEventListener('click', async () => {
+            const movieId = results[index].id
+            const movieDetailsUrl = getDynamicUrl(
+                'GET_MOVIE_DETAILS',
+                {},
+                movieId
+            )
+            const movieDetails = await fetchDetails(movieDetailsUrl)
+            //call the modalFunction with moviesDetails
+            movieDetailsHandler(movieDetails)
+        })
     }
 
     //pagination handling

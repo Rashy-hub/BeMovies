@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 .header {
@@ -192,7 +193,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-bottom: 80px;
+  margin-bottom: 54px;
   gap: 0;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -218,12 +219,16 @@
 
 .login-dialog__switch-button--login {
   border: 1px solid black;
+  color: white;
   border-left: 0px;
   border-radius: 0px 8px 8px 0px;
 }
 
 .login-dialog__switch-button--signup {
+  outline: 1px solid white;
+  background-color: black;
   border: 0px;
+  color: white;
   text-wrap: nowrap;
   border-radius: 8px 0px 0px 8px;
 }
@@ -231,37 +236,259 @@
 .login-dialog__form-field {
   width: 288px;
   height: 44px;
-  padding: 5px;
+  padding-top: 14px;
+  padding-bottom: 11px;
+  padding-left: 20px;
+  margin-bottom: 25px;
   border-radius: 8px;
 }
 
 .login-dialog__form-field::-webkit-input-placeholder {
   color: black;
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.36px;
+  text-align: left;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
 }
 
 .login-dialog__form-field::-moz-placeholder {
   color: black;
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.36px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
 }
 
 .login-dialog__form-field:-ms-input-placeholder {
   color: black;
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.36px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
 }
 
 .login-dialog__form-field::-ms-input-placeholder {
   color: black;
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.36px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
 }
 
 .login-dialog__form-field::placeholder {
   color: black;
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.36px;
+  text-align: left;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
+}
+
+.login-dialog__checkbox-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 9px;
+  margin-bottom: 46px;
+}
+
+.login-dialog__login-button {
+  width: 288px;
+  height: 47px;
+  border-radius: 8px;
+  background-color: #cc0000;
+  color: white;
+  font-family: "Inria Sans";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 23.98px;
+  letter-spacing: 0.03em;
+  text-align: center;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
 }
 
 .login-dialog__forgot-password {
+  width: 100%;
+  text-align: left;
   color: red;
+  margin-top: 30px;
+  margin-bottom: 19px;
+}
+
+.login-dialog__not-member-yet {
+  width: 100%;
+  text-align: left;
 }
 
 .login-dialog__not-member-yet a {
   text-decoration: none;
   color: red;
+}
+
+/* #open-login-dialog {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #2980b9;
+    }
+} */
+#open-login-dialog:focus {
+  outline: none;
+}
+
+/*Movie Details Modal*/
+#movie-dialog {
+  position: fixed;
+  width: 742px;
+  height: 526px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 1000;
+  padding: 74px 74px 49px 79px;
+  overflow-y: hidden;
+  background-color: black;
+  color: white;
+  /*
+  */
+}
+#movie-dialog[open] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+#movie-dialog .movie-dialog__rating-icon {
+  width: 50px;
+}
+#movie-dialog .movie-dialog__details-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 58px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+#movie-dialog .movie-dialog__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 12px;
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+}
+#movie-dialog .movie-dialog__title {
+  text-transform: uppercase;
+  color: #cc0000;
+  font-family: "Inria Sans";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 23.98px;
+  letter-spacing: 0.03em;
+  text-align: left;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
+}
+#movie-dialog .movie-dialog__close-button {
+  position: absolute;
+  background: transparent;
+  width: 24px;
+  height: 24px;
+  top: 10px;
+  right: 10px;
+}
+#movie-dialog .movie-dialog__close-button button img {
+  background-color: transparent;
+}
+#movie-dialog .movie-dialog__poster {
+  width: 200px;
+  border: 1px white solid;
+}
+#movie-dialog .movie-dialog__description {
+  font-family: "Inria Sans";
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  letter-spacing: 0.03em;
+  text-align: left;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
+}
+#movie-dialog .movie-dialog__release-date {
+  font-family: " Inria Sans";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16.79px;
+  letter-spacing: 0.03em;
+  text-align: left;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
+}
+#movie-dialog .movie-dialog__rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+#movie-dialog .movie-dialog__rating-icon {
+  width: 21px;
+  height: 21px;
+}
+#movie-dialog .movie-dialog__rating-value {
+  text-transform: uppercase;
+  color: #cc0000;
+  font-family: "Inria Sans";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 23.98px;
+  letter-spacing: 0.03em;
+  text-align: left;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
 }
 
 *,
@@ -576,4 +803,112 @@ h1 {
 
 .swiper-container-genre {
   height: 100%;
+}
+
+/*Swiper slide overlay modification */
+.swiper-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 352px;
+  background: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
+  color: white;
+  opacity: 0; /* Caché par défaut */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out; /* Animation fluide */
+}
+
+.overlay h3 {
+  color: white;
+  font-family: "Inter";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.2px;
+  text-align: center;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
+  margin-bottom: 23px;
+  margin-top: 100px;
+  width: 186px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.overlay_date {
+  font-family: "Inter";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.2px;
+  text-align: center;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
+  width: 160px;
+  height: 46px;
+}
+
+.overlay_note {
+  font-family: "Inter";
+  color: red;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 38.73px;
+  text-align: center;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
+}
+.overlay_note img {
+  width: 35px;
+  height: 34px;
+}
+
+.overlay_genres {
+  color: white;
+  font-family: "Inter";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.94px;
+  text-align: center;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
+  width: 160px;
+  height: 36px;
+}
+
+.swiper-slide:hover .overlay {
+  opacity: 1; /* Affiche l'overlay au survol */
 }

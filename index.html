@@ -20,8 +20,8 @@
             <nav class="header__nav">
                 <a href="#results">search</a><a href="#latest">latest</a
                 ><a href="#genre">genres</a>
-                <a href="#" id="open-login-dialog">login</a>
-                <a href="#" id="open-login-dialog">signin</a>
+                <a href="#" class="open-login-dialog">login</a>
+                <a href="#" class="open-login-dialog">signin</a>
             </nav>
         </header>
         <main class="main">
@@ -93,6 +93,48 @@
                     </div>
                 </div>
             </dialog>
+            <!-- Movie details popup -->
+            <!-- Modal pour Movie Details -->
+            <dialog id="movie-dialog" class="movie-dialog">
+                <div class="movie-dialog__content">
+                    <div
+                        class="movie-dialog__close-button"
+                        id="movie-close-button"
+                    >
+                        <img
+                            src="./assets/close.svg"
+                            alt="Close  Dialog"
+                            id="close-svg"
+                        />
+                    </div>
+                    <div class="movie-dialog__details-container">
+                        <div class="movie-dialog__poster">
+                            <img src="" alt="Movie Poster" />
+                        </div>
+                        <div class="movie-dialog__info">
+                            <h2 class="movie-dialog__title"></h2>
+                            <p class="movie-dialog__release-date"></p>
+                            <div class="movie-dialog__rating">
+                                <div class="movie-dialog__rating-icon">
+                                    <img
+                                        src="/assets/star.svg"
+                                        alt="Rating Star"
+                                    />
+                                </div>
+
+                                <p class="movie-dialog__rating-value"></p>
+                            </div>
+                            <p class="movie-dialog__genre"></p>
+                            <p class="movie-dialog__description"></p>
+                            <p class="movie-dialog__cast">
+                                CAST:
+                                <span class="movie-dialog__cast-names"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
+
             <!-- Sections html start from here -->
             <section class="uisection">
                 <input

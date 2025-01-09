@@ -43,7 +43,7 @@
 .login-dialog__switch-buttons-container {
     display: flex;
     flex-direction: row;
-    margin-bottom: 80px;
+    margin-bottom: 54px;
     gap: 0;
     justify-content: center;
     align-items: center;
@@ -57,12 +57,16 @@
 }
 .login-dialog__switch-button--login {
     border: 1px solid black;
+    color: white;
     border-left: 0px;
     border-radius: 0px 8px 8px 0px;
 }
 
 .login-dialog__switch-button--signup {
+    outline: 1px solid white;
+    background-color: black;
     border: 0px;
+    color: white;
     text-wrap: nowrap;
     border-radius: 8px 0px 0px 8px;
 }
@@ -70,17 +74,192 @@
 .login-dialog__form-field {
     width: 288px;
     height: 44px;
-    padding: 5px;
+    padding-top: 14px;
+    padding-bottom: 11px;
+    padding-left: 20px;
+    margin-bottom: 25px;
     border-radius: 8px;
 }
 .login-dialog__form-field::placeholder {
     color: black;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
+.login-dialog__checkbox-container {
+    display: flex;
+    gap: 9px;
+    margin-bottom: 46px;
+}
+.login-dialog__login-button {
+    width: 288px;
+    height: 47px;
+    border-radius: 8px;
+    background-color: #cc0000;
+    color: white;
+    font-family: 'Inria Sans';
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23.98px;
+    letter-spacing: 0.03em;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
 .login-dialog__forgot-password {
+    width: 100%;
+    text-align: left;
     color: red;
+    margin-top: 30px;
+    margin-bottom: 19px;
+}
+
+.login-dialog__not-member-yet {
+    width: 100%;
+    text-align: left;
 }
 .login-dialog__not-member-yet a {
     text-decoration: none;
     color: red;
+}
+
+// Style for the "Register" button (that you toggle)
+/* #open-login-dialog {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #2980b9;
+    }
+} */
+
+#open-login-dialog:focus {
+    outline: none;
+}
+
+/*Movie Details Modal*/
+
+// Movie details modal styles
+#movie-dialog {
+    // Styles généraux pour le dialog
+    position: fixed;
+    width: 742px;
+    height: 526px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    padding: 74px 74px 49px 79px;
+    overflow-y: hidden;
+    background-color: black;
+    color: white;
+
+    &[open] {
+        // Style pour afficher le dialog
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .movie-dialog__rating-icon {
+        width: 50px;
+    }
+    .movie-dialog__details-container {
+        display: flex;
+        gap: 58px;
+        justify-content: space-between;
+    }
+    .movie-dialog__info {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex-basis: 50%;
+    }
+    .movie-dialog__title {
+        text-transform: uppercase;
+        color: #cc0000;
+        font-family: 'Inria Sans';
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 23.98px;
+        letter-spacing: 0.03em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+    }
+    /*
+*/
+
+    .movie-dialog__close-button {
+        // Bouton pour fermer le dialog
+        position: absolute;
+        background: transparent;
+        width: 24px;
+        height: 24px;
+        top: 10px;
+        right: 10px;
+        button img {
+            background-color: transparent;
+        }
+    }
+
+    .movie-dialog__poster {
+        // Image d'affiche du film
+        width: 200px;
+        border: 1px white solid;
+    }
+
+    .movie-dialog__description {
+        font-family: 'Inria Sans';
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 24px;
+        letter-spacing: 0.03em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+    }
+
+    .movie-dialog__release-date {
+        font-family: ' Inria Sans';
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 16.79px;
+        letter-spacing: 0.03em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+    }
+
+    .movie-dialog__rating {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .movie-dialog__rating-icon {
+        width: 21px;
+        height: 21px;
+    }
+
+    .movie-dialog__rating-value {
+        text-transform: uppercase;
+        color: #cc0000;
+        font-family: 'Inria Sans';
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 23.98px;
+        letter-spacing: 0.03em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+    }
 }
